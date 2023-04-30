@@ -11,17 +11,17 @@ yargs.command({
             console.log("Please provide address🙏")
         }
         else {
-            geocode(address, (error, data) => {
+            geocode(address, (error, {latitude, longitude, place} = {}) => {
                 if (error) {
                     return console.log(error + " => geocode")
                 }
 
-                forecast(data.latitude, data.longitude, (error, forecastData) => {
+                forecast(latitude, longitude, (error, {weather, temperature, feel} = {}) => {
                     if (error) {
                         return console.log(error + " => forecast")
                     }
-                    console.log(data.place)
-                    console.log(forecastData)
+                    console.log(place)
+                    console.log(weather, temperature, feel)
                 })
             })
         }
